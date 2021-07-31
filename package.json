@@ -1,0 +1,10 @@
+{
+  "name": "electron-first-app",
+  "version": "0.0.1",
+  "description": "Aplicação Desktop com Electron e ReactJS",
+  "main": "index.js",
+  "repository": "git@github.com:Nimbo1999/electron-first-app.git",
+  "author": "Matheus de Oliveira Lopes <matlopes1999@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
