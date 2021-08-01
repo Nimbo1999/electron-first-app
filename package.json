@@ -8,9 +8,31 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-	  "start": "electron ."
+    "start": "electron .",
+    "watch": "webpack --config webpack.config.js --watch"
   },
   "devDependencies": {
-    "electron": "^13.1.7"
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.9",
+    "@babel/preset-react": "^7.14.5",
+    "autoprefixer": "^10.3.1",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "css-loader": "^6.2.0",
+    "electron": "^13.1.7",
+    "electron-reload": "^2.0.0-alpha.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "4.x",
+    "node-sass": "^6.0.1",
+    "postcss-loader": "^6.1.1",
+    "sass": "^1.37.0",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1",
+    "webpack": "4.x",
+    "webpack-cli": "3.x"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
