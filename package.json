@@ -18,20 +18,23 @@
     "autoprefixer": "^10.3.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.1.0",
-    "css-loader": "^6.2.0",
     "electron": "^13.1.7",
     "electron-reload": "^2.0.0-alpha.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "4.x",
     "node-sass": "^6.0.1",
-    "postcss-loader": "^6.1.1",
+    "postcss": "8.1.0",
+    "postcss-loader": "4.2.0",
     "sass": "^1.37.0",
-    "sass-loader": "^12.1.0",
-    "style-loader": "^3.2.1",
+    "sass-loader": "10.1.1",
+    "style-loader": "^2.0.0",
     "webpack": "4.x",
     "webpack-cli": "3.x"
   },
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "bootstrap": "^5.0.2",
+    "css-loader": "^5.2.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }

@@ -28,8 +28,13 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              ident: 'postcss',
-              plugins: () => [autoprefixer({})]
+				postcssOptions: {
+					plugins: function() {
+						return [autoprefixer]
+					}
+				}
+            //   ident: 'postcss',
+            //   plugins: () => [autoprefixer({})]
             }
           },
           'sass-loader'
