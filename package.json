@@ -28,6 +28,7 @@
     "sass": "^1.37.0",
     "sass-loader": "10.1.1",
     "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
     "webpack": "4.x",
     "webpack-cli": "3.x"
   },
@@ -36,6 +37,7 @@
     "bootstrap": "^5.0.2",
     "css-loader": "^5.2.7",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0"
   }
 }

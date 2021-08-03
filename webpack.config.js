@@ -33,15 +33,13 @@ module.exports = {
 						return [autoprefixer]
 					}
 				}
-            //   ident: 'postcss',
-            //   plugins: () => [autoprefixer({})]
             }
           },
           'sass-loader'
         ]
       },
       {
-        test: /\.(png|jpe?g|gif)$/,
+        test: /\.(png|jpe?g|gif|woff(2)?|eot|ttf|svg)$/,
         loader: 'file-loader',
         options: {
           name: '[contenthash].[ext]',
