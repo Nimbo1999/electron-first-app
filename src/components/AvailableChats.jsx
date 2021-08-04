@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 const AvailableChats = () => {
+	const { url } = useRouteMatch();
+	const history = useHistory();
+
 	const [chatList] = useState([
 		{
 			id: 'a',
@@ -45,7 +49,7 @@ const AvailableChats = () => {
 
 								<p className="card-text">{ `${chat.title} ${index} Description` }</p>
 
-								<button onClick={() => {}} className="btn btn-outline-primary">Join Chat</button>
+								<button onClick={() => history.push(url + '/chat')} className="btn btn-outline-primary">Join Chat</button>
 							</div>
 						</div>
 					</div>

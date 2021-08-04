@@ -332,21 +332,21 @@ ul {
 .chat-name-container {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: flex-start;
+	align-items: center;
 	padding: 15px 15px;
 	border-bottom: 1px solid #e6ecf3;
 	-webkit-border-radius: 0 3px 0 0;
 	-moz-border-radius: 0 3px 0 0;
 	border-radius: 0 3px 0 0;
 
-	span.name {
-		font-weight: 700;
-		align-self: center;
-		font-size: 2rem;
+	.back-button {
+		margin-right: 1em;
 	}
 
-	.back-button {
-		align-self: center;;
+	span.name {
+		font-weight: 700;
+		font-size: 2rem;
 	}
 }
   

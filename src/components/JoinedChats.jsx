@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 import ChatSearch from 'components/ChatSearch';
 
 const JoinedChats = () => {
+	const history = useHistory();
+	const { url } = useRouteMatch();
+
 	const [chatList] = useState([
 		{
 			id: 'a',
@@ -37,7 +41,7 @@ const JoinedChats = () => {
 			<ul className="items">
 				{chatList.map((chat, index) => (
 					<li
-						onClick={() => {}}
+						onClick={() => history.push(url + '/chat')}
 						className="item"
 						key={chat.id}
 					>
