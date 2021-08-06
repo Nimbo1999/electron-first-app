@@ -11,7 +11,7 @@ const Chat = () => {
 		<Switch>
 			<Route path={ path } exact component={AvailableChats} />
 
-			<Route path={ path + '/chat' } component={SelectedChat} />
+			<Route path={ path + '/chat/:id' } component={SelectedChat} />
 		</Switch>
 	);
 }

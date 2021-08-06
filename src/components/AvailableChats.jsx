@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 
+import SectionTitle from 'components/SectionTitle';
+
 const AvailableChats = () => {
 	const { url } = useRouteMatch();
 	const history = useHistory();
@@ -34,6 +36,8 @@ const AvailableChats = () => {
 
 	return (
 		<main className="container-fluid">
+			<SectionTitle />
+
 			<div className="row mt-3">
 				{ false && (
 					<div className="container-fluid">
@@ -49,7 +53,7 @@ const AvailableChats = () => {
 
 								<p className="card-text">{ `${chat.title} ${index} Description` }</p>
 
-								<button onClick={() => history.push(url + '/chat')} className="btn btn-outline-primary">Join Chat</button>
+								<button onClick={() => history.push(url + '/chat' + '/' + index )} className="btn btn-outline-primary">Join Chat</button>
 							</div>
 						</div>
 					</div>

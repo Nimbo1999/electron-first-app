@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import SectionTitle from 'components/SectionTitle';
 
 const SelectedChat = () => {
+	const { id } = useParams();
 
 	const [chats] = useState([
 		{
+			id: 'aa',
 			user: 'me',
 			profileImage: 'https://www.pinclipart.com/picdir/middle/133-1331433_free-user-avatar-icons-happy-flat-design-png.png',
 			name: 'Matheus Lopes',
@@ -11,6 +16,7 @@ const SelectedChat = () => {
 			date: new Date().toISOString(),
 		},
 		{
+			id: 'aabb',
 			user: 'Suzana',
 			profileImage: 'https://i.dlpng.com/static/png/7105396_preview.png',
 			name: 'Suzana Barreto Lopes',
@@ -18,6 +24,7 @@ const SelectedChat = () => {
 			date: new Date().toISOString(),
 		},
 		{
+			id: 'aacc',
 			user: 'me',
 			profileImage: 'https://www.pinclipart.com/picdir/middle/133-1331433_free-user-avatar-icons-happy-flat-design-png.png',
 			name: 'Matheus Lopes',
@@ -25,6 +32,7 @@ const SelectedChat = () => {
 			date: new Date().toISOString(),
 		},
 		{
+			id: 'aavv',
 			user: 'Suzana',
 			profileImage: 'https://i.dlpng.com/static/png/7105396_preview.png',
 			name: 'Suzana Barreto Lopes',
@@ -35,9 +43,11 @@ const SelectedChat = () => {
 
 	return (
 		<div className="chat-container">
+			<SectionTitle title={ `On chat ${id}` } />
+
 			<ul className="chat-box chatContainerScroll">
 				{chats.map(chat => (
-					<li className={ chat.user === 'me' ? 'chat-right' : 'chat-left' }>
+					<li key={chat.id} className={ chat.user === 'me' ? 'chat-right' : 'chat-left' }>
 						<div className="chat-avatar">
 							<img
 							src={chat.profileImage}

@@ -41,7 +41,7 @@ const JoinedChats = () => {
 			<ul className="items">
 				{chatList.map((chat, index) => (
 					<li
-						onClick={() => history.push(url + '/chat')}
+						onClick={() => history.push(url + '/chat' + '/' + index)}
 						className="item"
 						key={chat.id}
 					>
