@@ -18,6 +18,7 @@
     "autoprefixer": "^10.3.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-module-resolver": "^4.1.0",
+    "dotenv-webpack": "^7.0.3",
     "electron": "^13.1.7",
     "electron-reload": "^2.0.0-alpha.1",
     "file-loader": "^6.2.0",

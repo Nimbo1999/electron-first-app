@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/index.jsx',
@@ -61,6 +62,7 @@ module.exports = {
 		filename: 'index.html',
 	}),
     new webpack.HotModuleReplacementPlugin(),
+	new Dotenv(),
   ],
   resolve: {
 	extensions: ['.js', '.jsx'],
