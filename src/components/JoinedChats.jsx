@@ -1,47 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 
 import ChatSearch from 'components/ChatSearch';
+
+import { useChatsFb, withChatsFb } from 'fb/useChatsFb';
 
 const JoinedChats = () => {
 	const history = useHistory();
 	const { url } = useRouteMatch();
 
-	const [chatList] = useState([
-		{
-			id: 'a',
-			image: 'https://banner2.cleanpng.com/20180627/qvc/kisspng-the-legend-of-zelda-majora-s-mask-discord-compute-discord-icon-5b3371b7b55eb4.6840271215300981037429.jpg',
-			title: 'Some Chat',
-			isOnline: true,
-		},
-		{
-			id: 'b',
-			image: 'https://banner2.cleanpng.com/20180627/qvc/kisspng-the-legend-of-zelda-majora-s-mask-discord-compute-discord-icon-5b3371b7b55eb4.6840271215300981037429.jpg',
-			title: 'Some Chat',
-			isOnline: true,
-		},
-		{
-			id: 'c',
-			image: 'https://banner2.cleanpng.com/20180627/qvc/kisspng-the-legend-of-zelda-majora-s-mask-discord-compute-discord-icon-5b3371b7b55eb4.6840271215300981037429.jpg',
-			title: 'Some Chat',
-			isOnline: true,
-		},
-		{
-			id: 'd',
-			image: 'https://banner2.cleanpng.com/20180627/qvc/kisspng-the-legend-of-zelda-majora-s-mask-discord-compute-discord-icon-5b3371b7b55eb4.6840271215300981037429.jpg',
-			title: 'Some Chat',
-			isOnline: true,
-		},
-	]);
+	const { chats, loading } = useChatsFb();
+
+	if (loading) return null;
 
 	return (
 		<div className="list-container">
 			<ChatSearch />
 
 			<ul className="items">
-				{chatList.map((chat, index) => (
+				{chats.map(chat => (
 					<li
-						onClick={() => history.push(url + '/chat' + '/' + index)}
+						onClick={() => history.push(`${url}/chat/${chat.id}`)}
 						className="item"
 						key={chat.id}
 					>
@@ -52,7 +31,7 @@ const JoinedChats = () => {
 						</div>
 
 						<p className="name-time">
-							<span className="name me-2">{`${chat.title} ${index + 1}`}</span>
+							<span className="name me-2">{chat.name}</span>
 						</p>
 					</li>
 				))}
@@ -61,4 +40,4 @@ const JoinedChats = () => {
 	);
 }
 
-export default JoinedChats;
+export default withChatsFb(JoinedChats);

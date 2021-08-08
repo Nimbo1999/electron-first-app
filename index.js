@@ -13,14 +13,13 @@ const createWindow = () => {
 		webPreferences: {
 			nodeIntegration: false,
 			preload: path.join(__dirname, 'preload.js'),
-		}
+		},
 	});
 
 	browserWindow.loadFile(path.join(__dirname, 'dist', 'index.html'))
 		.then(() => {
 			isDev && browserWindow.webContents.openDevTools();
 		});
-
 }
 
 if (isDev) {
