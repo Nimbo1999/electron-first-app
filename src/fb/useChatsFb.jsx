@@ -1,28 +1,19 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import firestore from './index';
+import { chatRoomsSelector, chatRoomsLoadingSelector } from 'store/chats/chats.selectors';
+import fetchChatRoomsThunk from 'store/chats/fetchChatRoomsThunk';
 
 const ChatsFbContext = createContext();
 
 const ChatsFbProvider = ({ children }) => {
-	const [chats, setChats] = useState([]);
-	const [loading, setLoading] = useState(false);
+	const dispatch = useDispatch();
+
+	const chats = useSelector(chatRoomsSelector);
+	const loading = useSelector(chatRoomsLoadingSelector);
 
 	useEffect(() => {
-		setLoading(true);
-
-		firestore.collection('chats')
-			.get()
-			.then((snapshot) => {
-
-				const data = snapshot.docs.map(doc => ({
-					id: doc.id,
-					...doc.data()
-				}));
-
-				setChats(data);
-				setLoading(false);
-			})
+		dispatch(fetchChatRoomsThunk());
 	}, []);
 
 	return (
