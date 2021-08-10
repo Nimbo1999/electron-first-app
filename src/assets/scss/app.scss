@@ -409,6 +409,10 @@ ul {
 			width: 100%;
 			text-align: left;
 
+			.hint-text {
+				font-size: .85rem;
+			}
+
 			.form-check {
 				display: flex;
 				align-items: center;

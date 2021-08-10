@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch } from 'react-router-dom';
 
 import ErrorBoundary from 'exeptions/ErrorBoundary';
 
-import routes from 'pages/router';
+import routes, { Route } from 'pages/router';
 
 import NavBar from 'components/NavBar';
 

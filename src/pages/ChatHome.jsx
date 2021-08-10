@@ -5,7 +5,7 @@ import { withChatsFb } from 'fb/useChatsFb';
 import JoinedChats from 'components/JoinedChats';
 import Chat from 'components/Chat';
 
-const Home = () => {
+const ChatHome = () => {
 	return (
 		<main className="row no-gutters fh">
 			<aside className="col-3 fh">
@@ -19,4 +19,4 @@ const Home = () => {
 	);
 }
 
-export default withChatsFb(Home);
+export default withChatsFb(ChatHome);

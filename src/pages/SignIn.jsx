@@ -1,41 +1,87 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
 const SignInPage = () => {
 	const history = useHistory();
+	const [classes, setClasses] = useState(['centered-container-form', 'bg-light', 'bg-gradient']);
+
+	const { register, handleSubmit, formState: { errors, isSubmitted } } = useForm();
+
+	const submitForm = data => {
+		console.log({ data });
+	}
+
+	useEffect(() => {
+		if (isSubmitted) {
+			setClasses([...classes, 'was-validated']);
+		}
+	}, [isSubmitted]);
+
+	console.log({ errors });
 
 	return (
 		<div className="centered-view">
 			<div className="centered-container">
-				<form onSubmit={() => {}} className="centered-container-form bg-light bg-gradient">
+				<form onSubmit={handleSubmit(submitForm)} className={classes.join(' ')} noValidate>
 					<div className="header">Welcome here!</div>
 
 					<div className="subheader">Login and chat with other people!</div>
 
 					<div className="form-container">
 						<div className="form-group">
-							<label htmlFor="email">Email</label>
+							<label htmlFor="email" className="form-label">Email</label>
 
 							<input
+								{...register('email', {
+									required: 'This field is required!',
+									pattern: {
+										value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+										message: 'You need to type a valid E-mail',
+										
+									}
+								})}
 								type="email"
 								className="form-control"
 								id="email"
-								name="email"
 								aria-describedby="emailHelp"
+								required
 							/>
 
-							<small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+							<div className="d-flex flex-column">
+								{errors && errors['email'] && (
+									<small id="emailHelp" className="hint-text form-text text-danger">
+									{errors['email'].message}
+									</small>
+								)}
+
+								<small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+							</div>
 						</div>
 
 						<div className="form-group">
-							<label htmlFor="password">Password</label>
+							<label htmlFor="password" className="form-label">Password</label>
 
 							<input
+								{...register('password', {
+									required: 'This field is required!',
+									minLength: {
+										value: 4,
+										message: 'Your password must have at least 4 characters!'
+									},
+								})}
 								type="password"
-								name="password"
 								className="form-control"
 								id="password"
+								required
+								minLength="4"
 							/>
+							{errors && errors['password'] && (
+								<small className="hint-text form-text text-danger">
+								{errors['password'].message}
+								</small>
+							)}
 						</div>
 
 						{ false && <div className="alert alert-danger small mt-2">Some error</div>}
