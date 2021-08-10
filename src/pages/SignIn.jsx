@@ -19,8 +19,6 @@ const SignInPage = () => {
 		}
 	}, [isSubmitted]);
 
-	console.log({ errors });
-
 	return (
 		<div className="centered-view">
 			<div className="centered-container">
@@ -39,7 +37,7 @@ const SignInPage = () => {
 									pattern: {
 										value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 										message: 'You need to type a valid E-mail',
-										
+
 									}
 								})}
 								type="email"
@@ -51,7 +49,7 @@ const SignInPage = () => {
 
 							<div className="d-flex flex-column">
 								{errors && errors['email'] && (
-									<small id="emailHelp" className="hint-text form-text text-danger">
+									<small className="hint-text form-text text-danger">
 									{errors['email'].message}
 									</small>
 								)}
