@@ -10,19 +10,19 @@ const routes = [
 		component: Settings
 	},
 	{
-		key: 'SignInPage',
-		path: '/sign-in',
-		component: SignIn
-	},
-	{
 		key: 'SignUpPage',
 		path: '/sign-up',
 		component: SignUp
 	},
 	{
-		key: 'HomePage',
-		path: '/',
+		key: 'AppPage',
+		path: '/chat',
 		component: Home
+	},
+	{
+		key: 'SignInPage',
+		path: '/',
+		component: SignIn
 	},
 ];
 

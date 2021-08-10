@@ -29,13 +29,6 @@ const NavBar = () => {
 					<span className="logged-in-user">Hi User</span>
 
 					<button
-						onClick={() => history.push('/sign-up')}
-						className="btn btn-sm btn-primary ms-2"
-					>
-						Sign Up
-					</button>
-
-					<button
 						onClick={() => history.push('/sign-in')}
 						className="btn btn-sm btn-outline-success ms-2"
 					>

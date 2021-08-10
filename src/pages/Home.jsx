@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { withChatsFb } from 'fb/useChatsFb';
+
 import JoinedChats from 'components/JoinedChats';
 import Chat from 'components/Chat';
 
@@ -17,4 +19,4 @@ const Home = () => {
 	);
 }
 
-export default Home;
+export default withChatsFb(Home);

@@ -3,7 +3,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 
 import ChatSearch from 'components/ChatSearch';
 
-import { useChatsFb, withChatsFb } from 'fb/useChatsFb';
+import { useChatsFb } from 'fb/useChatsFb';
 
 const JoinedChats = () => {
 	const history = useHistory();
@@ -20,7 +20,7 @@ const JoinedChats = () => {
 			<ul className="items">
 				{chats.map(chat => (
 					<li
-						onClick={() => history.push(`${url}/chat/${chat.id}`)}
+						onClick={() => history.push(`${url}/${chat.id}`)}
 						className="item"
 						key={chat.id}
 					>
@@ -40,4 +40,4 @@ const JoinedChats = () => {
 	);
 }
 
-export default withChatsFb(JoinedChats);
+export default JoinedChats;

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+
+import { useChatsFb } from 'fb/useChatsFb';
 
 import SectionTitle from 'components/SectionTitle';
 
@@ -7,32 +9,7 @@ const AvailableChats = () => {
 	const { url } = useRouteMatch();
 	const history = useHistory();
 
-	const [chatList] = useState([
-		{
-			id: 'a',
-			image: 'https://banner2.cleanpng.com/20180627/qvc/kisspng-the-legend-of-zelda-majora-s-mask-discord-compute-discord-icon-5b3371b7b55eb4.6840271215300981037429.jpg',
-			title: 'Some Chat',
-			isOnline: true,
-		},
-		{
-			id: 'b',
-			image: 'https://banner2.cleanpng.com/20180627/qvc/kisspng-the-legend-of-zelda-majora-s-mask-discord-compute-discord-icon-5b3371b7b55eb4.6840271215300981037429.jpg',
-			title: 'Some Chat',
-			isOnline: true,
-		},
-		{
-			id: 'c',
-			image: 'https://banner2.cleanpng.com/20180627/qvc/kisspng-the-legend-of-zelda-majora-s-mask-discord-compute-discord-icon-5b3371b7b55eb4.6840271215300981037429.jpg',
-			title: 'Some Chat',
-			isOnline: true,
-		},
-		{
-			id: 'd',
-			image: 'https://banner2.cleanpng.com/20180627/qvc/kisspng-the-legend-of-zelda-majora-s-mask-discord-compute-discord-icon-5b3371b7b55eb4.6840271215300981037429.jpg',
-			title: 'Some Chat',
-			isOnline: true,
-		},
-	]);
+	const { chats } = useChatsFb();
 
 	return (
 		<main className="container-fluid">
@@ -45,15 +22,17 @@ const AvailableChats = () => {
 					</div>
 				) }
 
-				{chatList.map((chat, index) => (
+				{chats.map(chat => (
 					<div className="col-lg-3 col-md-6 mb-3" key={chat.id}>
 						<div className="card">
 							<div className="card-body">
-								<h5 className="card-title">Chat {index + 1}</h5>
+								<h5 className="card-title">{chat.name}</h5>
 
-								<p className="card-text">{ `${chat.title} ${index} Description` }</p>
+								<p className="card-text">{chat.description}</p>
 
-								<button onClick={() => history.push(url + '/chat' + '/' + index )} className="btn btn-outline-primary">Join Chat</button>
+								<button onClick={() => history.push(`${url}/${chat.id}`)} className="btn btn-outline-primary">
+									Join Chat
+								</button>
 							</div>
 						</div>
 					</div>

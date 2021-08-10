@@ -403,6 +403,7 @@ ul {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		background-color: $white;
 
 		.form-container {
 			width: 100%;
@@ -410,6 +411,8 @@ ul {
 
 			.form-check {
 				display: flex;
+				align-items: center;
+				gap: 8px;
 			}
 
 			.form-check-input {
