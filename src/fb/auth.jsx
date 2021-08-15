@@ -14,14 +14,24 @@ const AuthContextProvider = ({ children }) => {
 
 	const [authLoading, setLoading] = useState(false);
 	const [error, setError] = useState('');
+	const [accountCreated, setAccountCreated] = useState(false);
 
 	const signOutUser = useCallback(() => dispatch(
 		signOutUserAction()
 	), [dispatch]);
 
+	const replaceHistory = path => {
+		setError('');
+		setAccountCreated(false);
+		history.replace(path);
+	}
+
 	const onRegisterUserSuccess = ({ user }) => {
 		user.sendEmailVerification()
-			.then(() => setLoading(false))
+			.then(() => {
+				setAccountCreated(true);
+				setLoading(false);
+			})
 			.catch(err => console.log(err));
 	}
 
@@ -43,11 +53,11 @@ const AuthContextProvider = ({ children }) => {
 
 	const onSignInSuccess = useCallback(({ emailVerified }) => {
 
-		if (emailVerified) {
-			if (history && history.replace) history.replace('/chat');
-		} else {
+		if (!emailVerified) {
 			setError('Você deve verificar o seu e-mail antes de fazer o login com essa conta!');
 			signOutUser();
+		} else {
+			history.replace('/chat');
 		}
 
 	}, [signOutUser, history]);
@@ -62,6 +72,8 @@ const AuthContextProvider = ({ children }) => {
 				registerUser,
 				signOutUser,
 				signInUser,
+				replaceHistory,
+				accountCreated,
 				error,
 				authLoading
 			}}

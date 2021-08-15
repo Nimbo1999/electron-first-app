@@ -9,6 +9,7 @@ import NavBar from 'components/NavBar';
 import { setUserData } from 'store/auth/auth.actions';
 
 import { auth } from 'fb';
+import { withAuthContext } from 'fb/auth';
 
 const AppContent = () => {
 	const history = useHistory();
@@ -18,9 +19,11 @@ const AppContent = () => {
 	useEffect(() => {
 		auth.onAuthStateChanged(user => {
 
-			if (user) {
+			if (user && user.emailVerified) {
+
 				dispatch(setUserData(user));
 				history.replace('/chat');
+
 			} else {
 				console.log('No user connected!');
 			}
@@ -45,4 +48,4 @@ const AppContent = () => {
 	);
 }
 
-export default AppContent;
+export default withAuthContext(AppContent);

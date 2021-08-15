@@ -5,8 +5,6 @@ import ErrorBoundary from 'exeptions/ErrorBoundary';
 
 import AppContent from 'pages/AppContent';
 
-import { withAuthContext } from 'fb/auth';
-
 const App = () => {
 
 	return (
@@ -20,4 +18,4 @@ const App = () => {
 	);
 }
 
-export default withAuthContext(App);
+export default App;

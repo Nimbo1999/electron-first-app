@@ -2,7 +2,9 @@ const FIREBASE_CONSTANTS = {
 
 	COLLECTIONS: {
 
-		CHATS: 'chats'
+		CHATS: 'chats',
+
+		PROFILES: 'profiles',
 
 	}
 

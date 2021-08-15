@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 
 import { useAuthContext } from 'fb/auth';
 
 const SignInPage = () => {
-	const history = useHistory();
 	const [classes, setClasses] = useState(['centered-container-form', 'bg-light', 'bg-gradient']);
 
-	const { signInUser, error } = useAuthContext();
+	const { signInUser, error, replaceHistory } = useAuthContext();
 
 	const { register, handleSubmit, formState: { errors, isSubmitted } } = useForm();
 
@@ -92,7 +90,7 @@ const SignInPage = () => {
 					Not registered yet?
 
 					<button
-						onClick={() => history.replace('/sign-up')}
+						onClick={() => replaceHistory('/sign-up')}
 						className="btn btn-link"
 						type="button"
 					>

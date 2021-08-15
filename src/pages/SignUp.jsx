@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { useAuthContext } from 'fb/auth';
 
 const SignUpPage = () => {
-	const history = useHistory();
-
-	const { registerUser, authLoading } = useAuthContext();
+	const { registerUser, authLoading, replaceHistory, accountCreated } = useAuthContext();
 
 	const [classes, setClasses] = useState(['centered-container-form', ' bg-light', 'bg-gradient']);
 
@@ -123,6 +120,10 @@ const SignUpPage = () => {
 						>
 							Register
 						</button>
+
+						{accountCreated && <div className="alert alert-success small mt-2">
+							Account created. Now you need to verify your email in order to login the app
+						</div>}
 					</div>
 				</form>
 
@@ -130,7 +131,7 @@ const SignUpPage = () => {
 					Already registered?
 
 					<button
-						onClick={() => history.replace('/sign-in')}
+						onClick={() => replaceHistory('/sign-in')}
 						className="btn btn-link"
 						type="button"
 					>
