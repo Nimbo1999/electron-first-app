@@ -16,17 +16,33 @@ const authReducer = (state = INITIAL_STATE, action) => {
 			};
 		}
 
+		case AUTH_TYPES.SIGN_IN_FAILURE: {
+			return {
+				...state,
+				user: null
+			};
+		}
+
+		case AUTH_TYPES.SIGN_OUT_SUCCESS: {
+			return {
+				...state,
+				user: null
+			};
+		}
+
+		case AUTH_TYPES.SIGN_OUT_FAILURE: {
+			return {
+				...state,
+				user: null
+			};
+		}
+
 		case AUTH_TYPES.REGISTER_USER_EMAIL_AND_PASSWORD_STARTED: {
 			return state;
 		}
 
 		case AUTH_TYPES.REGISTER_USER_EMAIL_AND_PASSWORD_SUCCESS: {
-			const { user } = action.payload;
-
-			return {
-				...state,
-				user
-			};
+			return state;
 		}
 
 		case AUTH_TYPES.REGISTER_USER_EMAIL_AND_PASSWORD_FAILURE: {

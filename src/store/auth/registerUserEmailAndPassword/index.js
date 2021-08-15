@@ -11,7 +11,7 @@ const registerUserEmailAndPasswordThunk = ({ email, password }, onSuccess, onErr
 
 	auth.createUserWithEmailAndPassword(email, password)
 		.then(response => {
-			dispatch(registerUserEmailAndPasswordSuccess(response));
+			dispatch(registerUserEmailAndPasswordSuccess());
 
 			if (onSuccess && typeof onSuccess === 'function') onSuccess(response);
 		})

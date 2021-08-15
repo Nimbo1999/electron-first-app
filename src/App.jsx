@@ -1,28 +1,23 @@
 import React, { Suspense } from 'react';
-import { HashRouter, Switch } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import ErrorBoundary from 'exeptions/ErrorBoundary';
 
-import routes, { Route } from 'pages/router';
+import AppContent from 'pages/AppContent';
 
-import NavBar from 'components/NavBar';
+import { withAuthContext } from 'fb/auth';
 
 const App = () => {
+
 	return (
 		<ErrorBoundary>
 			<HashRouter>
 				<Suspense fallback={<>Loading...</>}>
-					<NavBar />
-
-					<div className="content-wrapper">
-						<Switch>
-							{routes.map(({ key, ...route }) => <Route key={key} {...route} />)}
-						</Switch>
-					</div>
+					<AppContent />
 				</Suspense>
 			</HashRouter>
 		</ErrorBoundary>
 	);
 }
 
-export default App;
+export default withAuthContext(App);

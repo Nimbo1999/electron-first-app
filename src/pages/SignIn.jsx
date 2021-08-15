@@ -3,15 +3,15 @@ import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 
+import { useAuthContext } from 'fb/auth';
+
 const SignInPage = () => {
 	const history = useHistory();
 	const [classes, setClasses] = useState(['centered-container-form', 'bg-light', 'bg-gradient']);
 
-	const { register, handleSubmit, formState: { errors, isSubmitted } } = useForm();
+	const { signInUser, error } = useAuthContext();
 
-	const submitForm = data => {
-		console.log({ data });
-	}
+	const { register, handleSubmit, formState: { errors, isSubmitted } } = useForm();
 
 	useEffect(() => {
 		if (isSubmitted) {
@@ -22,7 +22,7 @@ const SignInPage = () => {
 	return (
 		<div className="centered-view">
 			<div className="centered-container">
-				<form onSubmit={handleSubmit(submitForm)} className={classes.join(' ')} noValidate>
+				<form onSubmit={handleSubmit(signInUser)} className={classes.join(' ')} noValidate>
 					<div className="header">Welcome here!</div>
 
 					<div className="subheader">Login and chat with other people!</div>
@@ -82,7 +82,7 @@ const SignInPage = () => {
 							)}
 						</div>
 
-						{ false && <div className="alert alert-danger small mt-2">Some error</div>}
+						{ error && <div className="alert alert-danger small mt-2">{error}</div>}
 
 						<button type="submit" className="btn btn-outline-primary mt-2">Login</button>
 					</div>

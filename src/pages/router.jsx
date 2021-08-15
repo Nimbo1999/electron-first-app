@@ -1,5 +1,8 @@
 import React from 'react';
 import { Route as RRDRoute, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { selectUser } from 'store/auth/auth.selector';
 
 import Settings from 'pages/Settings';
 import SignIn from 'pages/SignIn';
@@ -31,10 +34,9 @@ const routes = [
 ];
 
 const Route = ({ isProtected = false, component: Component, ...props }) => {
+	const isAuthenticated = useSelector(selectUser);
 
-	console.log({ isProtected, ...props });
-
-	if (isProtected) return (
+	if (isProtected && !isAuthenticated) return (
 		<RRDRoute {...props}>
 			<Redirect to="/" />
 		</RRDRoute>

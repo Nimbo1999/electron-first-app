@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { useAuthContext, withAuthContext } from 'fb/auth';
+import { useAuthContext } from 'fb/auth';
 
 const SignUpPage = () => {
 	const history = useHistory();
 
-	const { registerUser, loading } = useAuthContext();
+	const { registerUser, authLoading } = useAuthContext();
 
 	const [classes, setClasses] = useState(['centered-container-form', ' bg-light', 'bg-gradient']);
 
@@ -119,7 +119,7 @@ const SignUpPage = () => {
 						<button
 							type="submit"
 							className="btn btn-outline-primary mt-2"
-							disabled={ loading }
+							disabled={ authLoading }
 						>
 							Register
 						</button>
@@ -142,4 +142,4 @@ const SignUpPage = () => {
 	);
 }
 
-export default withAuthContext(SignUpPage);
+export default SignUpPage;

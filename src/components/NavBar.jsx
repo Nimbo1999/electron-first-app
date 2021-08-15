@@ -1,8 +1,19 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { selectUser } from 'store/auth/auth.selector';
+
+import { useAuthContext } from 'fb/auth';
 
 const NavBar = () => {
 	const history = useHistory();
+
+	const { signOutUser } = useAuthContext();
+
+	const user = useSelector(selectUser);
+
+	if (!user) return null;
 
 	return (
 		<div className="chat-navbar">
@@ -26,7 +37,12 @@ const NavBar = () => {
 				</div>
 
 				<div className="chat-navbar-inner-right">
-					<span className="logged-in-user">Hi User</span>
+					<button
+						onClick={signOutUser}
+						className="btn btn-sm btn-outline-danger ms-2"
+					>
+						Sign Out
+					</button>
 
 					<button
 						onClick={() => history.push('/sign-in')}

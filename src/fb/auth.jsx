@@ -1,19 +1,25 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-
-import { auth } from 'fb';
+import { useHistory } from 'react-router-dom';
 
 import registerUserEmailAndPassword from 'store/auth/registerUserEmailAndPassword';
-import { setUserData } from 'store/auth/auth.actions';
+import signOutUserAction from 'store/auth/signOutUser';
+import signInUserAction from 'store/auth/signInUser';
 
 const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 
-	const [loading, setLoading] = useState(false);
+	const [authLoading, setLoading] = useState(false);
+	const [error, setError] = useState('');
 
-	const onRegisterUserSuccess = user => {
+	const signOutUser = useCallback(() => dispatch(
+		signOutUserAction()
+	), [dispatch]);
+
+	const onRegisterUserSuccess = ({ user }) => {
 		user.sendEmailVerification()
 			.then(() => setLoading(false))
 			.catch(err => console.log(err));
@@ -25,29 +31,39 @@ const AuthContextProvider = ({ children }) => {
 		dispatch(
 			registerUserEmailAndPassword(
 				data,
-				({ user }) => onRegisterUserSuccess(user),
-				error => {
+				onRegisterUserSuccess,
+				err => {
 					setLoading(false);
-					console.log({ error });
+					console.log(err);
 				},
 			)
 		);
 
 	}, [dispatch]);
 
-	useEffect(() => {
-		auth.onAuthStateChanged(user => {
-			if (user) {
-				dispatch(setUserData(user));
-			}
-		});
-	}, []);
+	const onSignInSuccess = useCallback(({ emailVerified }) => {
+
+		if (emailVerified) {
+			if (history && history.replace) history.replace('/chat');
+		} else {
+			setError('Você deve verificar o seu e-mail antes de fazer o login com essa conta!');
+			signOutUser();
+		}
+
+	}, [signOutUser, history]);
+
+	const signInUser = useCallback(data => dispatch(
+		signInUserAction(data, onSignInSuccess)
+	), [dispatch]);
 
 	return (
 		<AuthContext.Provider
 			value={{
 				registerUser,
-				loading
+				signOutUser,
+				signInUser,
+				error,
+				authLoading
 			}}
 		>
 			{children}
