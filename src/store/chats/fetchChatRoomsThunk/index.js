@@ -1,4 +1,4 @@
-import firestore from 'fb';
+import { firestore } from 'fb';
 import ErrorHandler from 'exeptions/error.handler';
 
 import FIREBASE_CONSTANTS from 'constants/firebase.constants';

@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
+import { useAuthContext, withAuthContext } from 'fb/auth';
+
 const SignUpPage = () => {
 	const history = useHistory();
 
+	const { registerUser, loading } = useAuthContext();
+
 	const [classes, setClasses] = useState(['centered-container-form', ' bg-light', 'bg-gradient']);
 
-	const { register, handleSubmit, formState: { errors, isSubmitted, isValid } } = useForm();
-
-	const submitForm = data => {
-		console.log({ data });
-	}
+	const { register, handleSubmit, formState: { errors, isSubmitted, isSubmitSuccessful } } = useForm();
 
 	useEffect(() => {
 		if (isSubmitted) {
@@ -22,7 +22,7 @@ const SignUpPage = () => {
 	return (
 		<div className="centered-view">
 			<div className="centered-container">
-				<form onSubmit={handleSubmit(submitForm)} className={classes.join(' ')} noValidate>
+				<form onSubmit={handleSubmit(registerUser)} className={classes.join(' ')} noValidate>
 					<div className="header">Create an account</div>
 
 					<div className="form-container">
@@ -59,13 +59,10 @@ const SignUpPage = () => {
 							<label htmlFor="username" className="form-label">Username</label>
 
 							<input
-								{...register('username', {
-									required: 'This field is required!',
-								})}
+								{...register('username')}
 								type="text"
 								className="form-control"
 								id="username"
-								required
 							/>
 
 							{errors && errors['username'] && (
@@ -103,7 +100,7 @@ const SignUpPage = () => {
 								className="form-control"
 								id="password"
 								required
-								maxLength="4"
+								minLength="4"
 							/>
 
 							{errors && errors['password'] && (
@@ -113,13 +110,19 @@ const SignUpPage = () => {
 							)}
 						</div>
 
-						{ isSubmitted && !isValid && (
+						{ isSubmitted && !isSubmitSuccessful && (
 							<div className="alert alert-danger small mt-2">
 								This form has errors
 							</div>
 						)}
 
-						<button type="submit" className="btn btn-outline-primary mt-2">Register</button>
+						<button
+							type="submit"
+							className="btn btn-outline-primary mt-2"
+							disabled={ loading }
+						>
+							Register
+						</button>
 					</div>
 				</form>
 
@@ -139,4 +142,4 @@ const SignUpPage = () => {
 	);
 }
 
-export default SignUpPage;
+export default withAuthContext(SignUpPage);
