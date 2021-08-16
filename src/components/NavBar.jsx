@@ -37,18 +37,15 @@ const NavBar = () => {
 				</div>
 
 				<div className="chat-navbar-inner-right">
-					<button
-						onClick={signOutUser}
-						className="btn btn-sm btn-outline-danger ms-2"
-					>
-						Sign Out
-					</button>
+					{user.displayName && (
+						<strong style={{ alignSelf: 'center' }}>Bem vindo, {user.displayName}</strong>
+					)}
 
 					<button
-						onClick={() => history.push('/sign-in')}
-						className="btn btn-sm btn-outline-success ms-2"
+						onClick={signOutUser}
+						className="btn btn-sm btn-outline-danger ms-2 text-uppercase"
 					>
-						Sign In
+						Sign Out
 					</button>
 				</div>
 			</nav>

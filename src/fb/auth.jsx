@@ -52,6 +52,7 @@ const AuthContextProvider = ({ children }) => {
 	}, [dispatch]);
 
 	const onSignInSuccess = useCallback(({ emailVerified }) => {
+		setLoading(false);
 
 		if (!emailVerified) {
 			setError('Você deve verificar o seu e-mail antes de fazer o login com essa conta!');
@@ -62,9 +63,11 @@ const AuthContextProvider = ({ children }) => {
 
 	}, [signOutUser, history]);
 
-	const signInUser = useCallback(data => dispatch(
-		signInUserAction(data, onSignInSuccess)
-	), [dispatch]);
+	const signInUser = useCallback(data =>{
+		setLoading(true);
+
+		dispatch(signInUserAction(data, onSignInSuccess));
+	}, [dispatch]);
 
 	return (
 		<AuthContext.Provider

@@ -7,7 +7,7 @@ import { useAuthContext } from 'fb/auth';
 const SignInPage = () => {
 	const [classes, setClasses] = useState(['centered-container-form', 'bg-light', 'bg-gradient']);
 
-	const { signInUser, error, replaceHistory } = useAuthContext();
+	const { signInUser, error, replaceHistory, authLoading } = useAuthContext();
 
 	const { register, handleSubmit, formState: { errors, isSubmitted } } = useForm();
 
@@ -16,6 +16,10 @@ const SignInPage = () => {
 			setClasses([...classes, 'was-validated']);
 		}
 	}, [isSubmitted]);
+
+	if (authLoading) return (
+		<h2>Loading...</h2>
+	);
 
 	return (
 		<div className="centered-view">
