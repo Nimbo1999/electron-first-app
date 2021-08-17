@@ -3,7 +3,9 @@ import CHATS_TYPES from 'store/chats/chats.types';
 const INITIAL_STATE = {
 	rooms: [],
 	currentChat: null,
+	joinedChats: [],
 	loadingChatRooms: false,
+	loadingJoinedChats: false
 }
 
 const chatsReducer = (state = INITIAL_STATE, action) => {
@@ -14,6 +16,22 @@ const chatsReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				currentChat: action.payload
+			};
+		}
+
+		case CHATS_TYPES.FETCH_JOINED_CHATS_FAILURE:
+		case CHATS_TYPES.FETCH_JOINED_CHATS_STARTED: {
+			return {
+				...state,
+				loadingJoinedChats: true,
+			};
+		}
+
+		case CHATS_TYPES.FETCH_JOINED_CHATS_SUCCESS: {
+			return {
+				...state,
+				loadingJoinedChats: false,
+				joinedChats: action.payload
 			};
 		}
 

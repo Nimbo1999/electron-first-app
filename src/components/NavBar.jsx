@@ -37,13 +37,17 @@ const NavBar = () => {
 				</div>
 
 				<div className="chat-navbar-inner-right">
+					{user.photoURL && (
+						<img src={user.photoURL} className="avatar me-2" />
+					)}
+
 					{user.displayName && (
-						<strong style={{ alignSelf: 'center' }}>Bem vindo, {user.displayName}</strong>
+						<strong style={{ alignSelf: 'center' }} className="me-4">{user.displayName}</strong>
 					)}
 
 					<button
 						onClick={signOutUser}
-						className="btn btn-sm btn-outline-danger ms-2 text-uppercase"
+						className="btn btn-sm btn-outline-danger ms-4 text-uppercase"
 					>
 						Sign Out
 					</button>

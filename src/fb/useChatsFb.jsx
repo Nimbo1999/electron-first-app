@@ -1,8 +1,10 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { chatRoomsSelector, chatRoomsLoadingSelector } from 'store/chats/chats.selectors';
+
 import fetchChatRoomsThunk from 'store/chats/fetchChatRoomsThunk';
+import fetchJoinedChatsThunk from 'store/chats/fetchJoinedChats';
 
 const ChatsFbContext = createContext();
 
@@ -12,9 +14,16 @@ const ChatsFbProvider = ({ children }) => {
 	const chats = useSelector(chatRoomsSelector);
 	const loading = useSelector(chatRoomsLoadingSelector);
 
+	const fetchChatRooms = useCallback(() => dispatch(fetchChatRoomsThunk()), [dispatch]);
+	const fetchJoinedChats = useCallback(() => dispatch(fetchJoinedChatsThunk()), [dispatch]);
+
 	useEffect(() => {
-		dispatch(fetchChatRoomsThunk());
-	}, []);
+
+		fetchChatRooms();
+
+		fetchJoinedChats();
+
+	}, [fetchChatRooms, fetchJoinedChats]);
 
 	return (
 		<ChatsFbContext.Provider

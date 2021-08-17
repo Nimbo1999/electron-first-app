@@ -27,7 +27,7 @@ const registerUserEmailAndPasswordThunk = ({ email, password, username, avatar }
 
 				response.user.updateProfile({
 					displayName: username,
-					photoUrl: avatar
+					photoURL: avatar
 				}).then(() => {
 
 					dispatch(registerUserEmailAndPasswordSuccess());
