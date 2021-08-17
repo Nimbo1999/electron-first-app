@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 
 import { useAuthContext } from 'fb/auth';
 
+import LoaderComponent from 'components/Loader';
+
 const SignInPage = () => {
 	const [classes, setClasses] = useState(['centered-container-form', 'bg-light', 'bg-gradient']);
 
@@ -16,10 +18,6 @@ const SignInPage = () => {
 			setClasses([...classes, 'was-validated']);
 		}
 	}, [isSubmitted]);
-
-	if (authLoading) return (
-		<h2>Loading...</h2>
-	);
 
 	return (
 		<div className="centered-view">
@@ -102,6 +100,8 @@ const SignInPage = () => {
 					</button>
 				</small>
 			</div>
+
+			<LoaderComponent active={ authLoading } />
 		</div>
 	);
 }

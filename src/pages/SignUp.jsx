@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 
 import { useAuthContext } from 'fb/auth';
 
+import LoaderComponent from 'components/Loader';
+
 const SignUpPage = () => {
 	const { registerUser, authLoading, replaceHistory, accountCreated } = useAuthContext();
 
@@ -139,6 +141,8 @@ const SignUpPage = () => {
 					</button>
 				</small>
 			</div>
+
+			<LoaderComponent active={ authLoading } />
 		</div>
 	);
 }

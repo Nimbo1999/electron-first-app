@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import routes, { Route } from 'pages/router';
 
 import NavBar from 'components/NavBar';
+import LoaderComponent from 'components/Loader';
 
 import { setUserData } from 'store/auth/auth.actions';
 
@@ -33,7 +34,7 @@ const AppContent = () => {
 		});
 	}, [dispatch]);
 
-	if (!appInitialized) return null;
+	if (!appInitialized) return <LoaderComponent active />;
 
 	return (
 		<>
